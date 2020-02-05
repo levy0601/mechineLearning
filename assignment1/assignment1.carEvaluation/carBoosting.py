@@ -34,6 +34,7 @@ from sklearn.metrics import classification_report, plot_confusion_matrix
 
 # clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0)
 test = []
+train = []
 
 for k in np.arange(0, 0.5, 0.01):
     clf = AdaBoostClassifier(DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0, ccp_alpha=k),
@@ -42,12 +43,15 @@ for k in np.arange(0, 0.5, 0.01):
     y_pre = clf.predict(X_test)
 
     test.append(clf.score(X_test,y_test))
+    train.append(clf.score(X_train,y_train))
+
     print(clf.score(X_test, y_test))
     np.set_printoptions(precision=2)
 
 plt.figure()
 plt.plot(np.arange(0, 0.5, 0.01),test,"#8B27CC")
-plt.text(np.argmax(test),np.max(test),("x = " +str(np.max(test))+ "y = " + str(np.argmax(test))))
+plt.plot(np.arange(0, 0.5, 0.01),train,"#EF1414")
+plt.text(np.argmax(test),np.max(test),(str(np.max(test))+ ","+ str(np.argmax(test))))
 plt.ylabel("Accuracy")
 plt.xlabel("ccp_alpha")
 plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)

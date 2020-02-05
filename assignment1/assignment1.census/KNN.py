@@ -169,8 +169,10 @@ for k in np.arange(1, 30, 2):
 
 plt.figure()
 plt.plot(np.arange(1, 30, 2),test,"#8B27CC")
+plt.plot(np.arange(1, 30, 2),train, "#25B71A")
 plt.text(np.argmax(test),np.max(test),("x = " +str(np.max(test))+ "y = " + str(np.argmax(test))))
 plt.ylabel("Accuracy")
 plt.xlabel("K")
 plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
+plt.title('KNN accuracy vs K Neighbour')
 plt.show()

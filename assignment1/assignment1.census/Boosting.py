@@ -49,6 +49,8 @@ from sklearn.ensemble import GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.metrics import classification_report, plot_confusion_matrix
 
 test = []
+train = []
+
 
 for k in np.arange(0, 0.5, 0.01):
     clf = AdaBoostClassifier(DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0, ccp_alpha=k),
@@ -57,6 +59,8 @@ for k in np.arange(0, 0.5, 0.01):
     y_pre = clf.predict(X_test)
 
     test.append(clf.score(X_test,y_test))
+    train.append(clf.score(X_train,y_train))
+
     print(clf.score(X_test, y_test))
     np.set_printoptions(precision=2)
 

@@ -89,11 +89,11 @@ for learningRate in np.arange(0.001, 0.5, 0.01):
 
 plt.figure()
 plt.plot(np.arange(0.001, 0.5, 0.01), learningR, "#8B27CC")
-plt.text(np.argmax(learningR), np.argmax(learningR) * 0.01 + 0.001,
-         ("x = " + str(np.max(learningR)) + "y = " + str(np.argmax(learningR) * 0.01 + 0.001)))
 plt.ylabel("Accuracy")
 plt.xlabel("learningR")
 plt.legend(['Test Data', 'Train Data'], loc=0, borderaxespad=0.2)
+plt.text(np.max(learningR), np.argmax(learningR) * 0.01 + 0.001,
+         ("x = " + str(np.max(learningR)) + "y = " + str(np.argmax(learningR) * 0.01 + 0.001)))
 plt.show()
 
 print("x = " + str(np.max(learningR)) + " y = " + str(np.argmax(learningR) * 0.01 + 0.001))
