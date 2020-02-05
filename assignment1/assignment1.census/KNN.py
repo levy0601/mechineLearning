@@ -47,92 +47,99 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50, random
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, plot_confusion_matrix
 
-print(" k = 3 ")
-clf = KNeighborsClassifier(n_neighbors=3)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
-
-print(" k = 4 ")
-clf = KNeighborsClassifier(n_neighbors=4)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
-
-
-print(" k = 5 ")
-clf = KNeighborsClassifier(n_neighbors=5)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
-
-
-print(" k = 10 ")
-clf = KNeighborsClassifier(n_neighbors=10)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
-
-
-print(" k = 20 ")
-clf = KNeighborsClassifier(n_neighbors=20)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
-
-print(" k = 20 ")
-clf = KNeighborsClassifier(n_neighbors=30)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
-
-print(" k = 1000 ")
-clf = KNeighborsClassifier(n_neighbors=1000)
-clf.fit(X_train, y_train)
-y_pre = clf.predict(X_test)
-# pre_train_Y = clf.predict(train_X)
-
-print(clf.score(X_test, y_test))
-print(classification_report(y_test, y_pre, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
+# k = 3
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
+#
+# k = 4
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
+#
+#
+# k = 5
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
+#
+#
+# k = 10
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
+#
+#
+# k = 20
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
+#
+# k = 30
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
+#
+# k = 1000
+# print(" k =  " + str(k))
+# clf = KNeighborsClassifier(n_neighbors=k)
+# clf.fit(X_train, y_train)
+# y_pre = clf.predict(X_test)
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(clf.score(X_test, y_test))
+# print(classification_report(y_test, y_pre, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
 #
 # # Plot non-normalized confusion matrix
 # titles_options = [("Confusion matrix, without normalization", None),
@@ -148,4 +155,22 @@ np.set_printoptions(precision=2)
 #     print(disp.confusion_matrix)
 #
 # plt.show()
+test = []
+train = []
+for k in np.arange(1, 30, 2):
+    clf = KNeighborsClassifier(n_neighbors=k)
+    clf.fit(X_train, y_train)
+    y_pre = clf.predict(X_test)
 
+    test.append(clf.score(X_test,y_test))
+    print(clf.score(X_test, y_test))
+    np.set_printoptions(precision=2)
+
+
+plt.figure()
+plt.plot(np.arange(1, 30, 2),test,"#8B27CC")
+plt.text(np.argmax(test),np.max(test),("x = " +str(np.max(test))+ "y = " + str(np.argmax(test))))
+plt.ylabel("Accuracy")
+plt.xlabel("K")
+plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
+plt.show()

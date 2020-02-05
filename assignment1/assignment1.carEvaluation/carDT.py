@@ -41,38 +41,38 @@ print ("train score")
 print(clf.score(X_train, y_train))
 print ("test score")
 print(clf.score(X_test, y_test))
-print ("train report")
-print(classification_report(y_train, y_tra, target_names=None))
-print ("test report")
-print(classification_report(y_test, y_pre, target_names=None))
+# print ("train report")
+# print(classification_report(y_train, y_tra, target_names=None))
+# print ("test report")
+# print(classification_report(y_test, y_pre, target_names=None))
 # print(classification_report(train_Y, pre_train_Y, target_names=None))
 
 np.set_printoptions(precision=2)
 
-# Plot non-normalized confusion matrix
-titles_options = [("Confusion matrix, without normalization", None),
-                  ("Normalized confusion matrix", 'true')]
-for title, normalize in titles_options:
-    disp = plot_confusion_matrix(clf, X_test, y_test,
-                                 display_labels=None,
-                                 cmap=plt.cm.Reds,
-                                 normalize=normalize)
-    disp.ax_.set_title(title)
-
-    print(title)
-    print(disp.confusion_matrix)
-
-for title, normalize in titles_options:
-    disp = plot_confusion_matrix(clf, X_train, y_train,
-                                 display_labels=None,
-                                 cmap=plt.cm.Blues,
-                                 normalize=normalize)
-    disp.ax_.set_title(title)
-
-    print(title)
-    print(disp.confusion_matrix)
-
-plt.show()
+# # Plot non-normalized confusion matrix
+# titles_options = [("Confusion matrix, without normalization", None),
+#                   ("Normalized confusion matrix", 'true')]
+# for title, normalize in titles_options:
+#     disp = plot_confusion_matrix(clf, X_test, y_test,
+#                                  display_labels=None,
+#                                  cmap=plt.cm.Reds,
+#                                  normalize=normalize)
+#     disp.ax_.set_title(title)
+#
+#     print(title)
+#     print(disp.confusion_matrix)
+#
+# for title, normalize in titles_options:
+#     disp = plot_confusion_matrix(clf, X_train, y_train,
+#                                  display_labels=None,
+#                                  cmap=plt.cm.Blues,
+#                                  normalize=normalize)
+#     disp.ax_.set_title(title)
+#
+#     print(title)
+#     print(disp.confusion_matrix)
+#
+# plt.show()
 
 
 path = clf.cost_complexity_pruning_path(X_train, y_train)
@@ -111,6 +111,38 @@ fig.tight_layout()
 train_scores = [clf.score(X_train, y_train) for clf in clfs]
 test_scores = [clf.score(X_test, y_test) for clf in clfs]
 
+train_scores_alpha = []
+
+for clf in clfs:
+    train_scores_alpha.append([clf.score(X_train, y_train),clf.ccp_alpha])
+
+test_scores_alpha = []
+
+for clf in clfs:
+    test_scores_alpha.append([clf.score(X_test, y_test), clf.ccp_alpha])
+
+#=======================get the max alpha with coresponding accuacry
+
+def getMax(list):
+    maxAccuary = 0;
+    maxAlpha = 0;
+    for x in list:
+        if (maxAccuary < x[0]):
+            maxAlpha = x[1]
+            maxAccuary = x[0]
+    return [maxAlpha, maxAccuary]
+
+
+test_max_alpha = getMax(test_scores_alpha)
+train_max_alpha =getMax(train_scores_alpha)
+
+print ("test_max_alpha" + str(test_max_alpha))
+print ("train_max_alpha" + str(train_max_alpha))
+
+#=======================get the max alpha with coresponding accuacry
+
+
+
 fig, ax = plt.subplots()
 ax.set_xlabel("alpha")
 ax.set_ylabel("accuracy")
@@ -119,5 +151,16 @@ ax.plot(ccp_alphas, train_scores, marker='o', label="train",
         drawstyle="steps-post")
 ax.plot(ccp_alphas, test_scores, marker='o', label="test",
         drawstyle="steps-post")
+plt.text(test_max_alpha[0],test_max_alpha[1],str(test_max_alpha[0]) + "," + str(test_max_alpha[1]))
+plt.text(train_max_alpha[0],train_max_alpha[1],str(train_max_alpha[0]) + "," + str(train_max_alpha[1]))
+
 ax.legend()
 plt.show()
+
+
+
+
+
+# print ("x = " +str(np.max(train_scores_alpha))+ "y = " + str(np.argmax(train_scores_alpha)))
+# print ("x = " +str(np.max(test_scores))+ "y = " + str(np.argmax(test_scores)))
+

@@ -6,7 +6,6 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-
 encoder_x =LabelEncoder()
 
 data = pd.read_csv("../../data set/Census Income Data Set/adult.csv")
@@ -37,28 +36,64 @@ scaler1 = preprocessing.StandardScaler()
 scaler1.fit(X)
 X = scaler1.transform(X)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.55, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
 # print(train_X)
 # print(train_Y)
 # print(test_X)
 # print(test_Y)
 
-from sklearn.neural_network import MLPClassifier
+from sklearn import svm, metrics
 from sklearn.metrics import classification_report, plot_confusion_matrix
 
 
-# clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
-# clf.fit(X_train, y_train)
-# y_pre = clf.predict(X_test)
-# # pre_train_Y = clf.predict(train_X)
-#
-# print(clf.score(X_test, y_test))
-# print(classification_report(y_test, y_pre, target_names = None))
-# # print(classification_report(train_Y, pre_train_Y, target_names=None))
-#
-# np.set_printoptions(precision=2)
-#
+result = []
+kernel = "linear"
+clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+clf.fit(X_train, y_train)
+y_pre_ovo = clf.predict(X_test)
+result.append(clf.score(X_test, y_test))
+# pre_train_Y = clf.predict(train_X)
+
+
+print(kernel + " " + str( clf.score(X_test, y_test)))
+
+kernel = "poly"
+clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+clf.fit(X_train, y_train)
+y_pre_ovo = clf.predict(X_test)
+result.append(clf.score(X_test, y_test))
+# pre_train_Y = clf.predict(train_X)
+
+print(kernel + " " + str( clf.score(X_test, y_test)))
+
+
+kernel = "rbf"
+clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+clf.fit(X_train, y_train)
+y_pre_ovo = clf.predict(X_test)
+result.append(clf.score(X_test, y_test))
+# pre_train_Y = clf.predict(train_X)
+
+print(kernel + " " + str( clf.score(X_test, y_test)))
+
+
+kernel = "sigmoid"
+clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+clf.fit(X_train, y_train)
+y_pre_ovo = clf.predict(X_test)
+result.append(clf.score(X_test, y_test))
+# pre_train_Y = clf.predict(train_X)
+
+print(kernel + " " + str( clf.score(X_test, y_test)))
+
+
+
+# print(classification_report(y_test, y_pre_ovo, target_names = None))
+# print(classification_report(train_Y, pre_train_Y, target_names=None))
+
+np.set_printoptions(precision=2)
+
 # # Plot non-normalized confusion matrix
 # titles_options = [("Confusion matrix, without normalization", None),
 #                   ("Normalized confusion matrix", 'true')]
@@ -74,26 +109,15 @@ from sklearn.metrics import classification_report, plot_confusion_matrix
 #
 # plt.show()
 
-learningR = []
 
-for learningRate in np.arange(0.001, 0.5, 0.01):
-    clf = MLPClassifier(activation="tanh", solver='sgd', learning_rate_init=learningRate, alpha=1e-5,
-                        hidden_layer_sizes=(5, 2), random_state=1)
-    clf.fit(X_train, y_train)
-    y_pre = clf.predict(X_test)
-    # pre_train_Y = clf.predict(train_X)
+kernelMethod = ('linear', 'poly', 'rbf', 'sigmoid')
+y_pos = np.arange(len(kernelMethod))
+accuracy = result
 
-    print("learning rate " + str(learningRate) + " :" + str(clf.score(X_test, y_test)))
-    learningR.append(clf.score(X_test, y_test))
-    # print(classification_report(train_Y, pre_train_Y, target_names=None))
+plt.bar(y_pos, accuracy, align='center', alpha=0.5)
+plt.xticks(y_pos, kernelMethod)
+plt.ylabel('accuracy')
+plt.title('NN accuracy vs Activation function')
 
-plt.figure()
-plt.plot(np.arange(0.001, 0.5, 0.01), learningR, "#8B27CC")
-plt.text(np.argmax(learningR), np.argmax(learningR) * 0.01 + 0.001,
-         ("x = " + str(np.max(learningR)) + "y = " + str(np.argmax(learningR) * 0.01 + 0.001)))
-plt.ylabel("Accuracy")
-plt.xlabel("learningR")
-plt.legend(['Test Data', 'Train Data'], loc=0, borderaxespad=0.2)
+
 plt.show()
-
-print("x = " + str(np.max(learningR)) + " y = " + str(np.argmax(learningR) * 0.01 + 0.001))
