@@ -130,13 +130,13 @@ plt.ylabel("Accuracy")
 plt.xlabel("learningR")
 plt.legend(['Test Data', 'Train Data'], loc=0, borderaxespad=0.2)
 plt.title('NN accuracy vs learning Rate')
-plt.text(np.max(learningRTest), np.argmax(learningRTest) * 0.01 + 0.001,
-         ("x = " + str(np.max(learningRTest)) + "y = " + str(np.argmax(learningRTest) * 0.01 + 0.001)))
-plt.text(np.max(learningRTrain), np.argmax(learningRTrain) * 0.01 + 0.001,
-         ("x = " + str(np.max(learningRTrain)) + "y = " + str(np.argmax(learningRTrain) * 0.01 + 0.001)))
+plt.text(np.argmax(learningRTest) * 0.01 + 0.001, np.max(learningRTrain),
+         ("x = " + str(np.argmax(learningRTest) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
+plt.text(np.argmax(learningRTrain) * 0.01 + 0.001, np.max(learningRTrain),
+         ("x = " + str(np.argmax(learningRTrain) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
 
 plt.show()
 
 print(np.argmax(learningRTest))
 print(np.max(learningRTest))
-print("x = " + str(np.max(learningRTest)) + " y = " + str(np.argmax(learningRTest) * 0.01 + 0.001))
+print(("x = " + str(np.argmax(learningRTest) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
