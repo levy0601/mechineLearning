@@ -48,15 +48,48 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, plot_confusion_matrix
 
 
-# clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
-# clf.fit(X_train, y_train)
-# y_pre = clf.predict(X_test)
-# # pre_train_Y = clf.predict(train_X)
-#
-# print(clf.score(X_test, y_test))
-# print(classification_report(y_test, y_pre, target_names = None))
-# # print(classification_report(train_Y, pre_train_Y, target_names=None))
-#
+clf = MLPClassifier(activation="tanh", solver='sgd', alpha=1e-5, hidden_layer_sizes=(5, 5,5,), learning_rate_init=0.041 , random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+
+clf = MLPClassifier(activation="tanh", solver='sgd', alpha=1e-5, hidden_layer_sizes=(5, 5,), learning_rate_init=0.041 , random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+
+clf = MLPClassifier(activation="tanh", solver='sgd', alpha=1e-5, hidden_layer_sizes=(5, 2,), learning_rate_init=0.041 , random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+
+clf = MLPClassifier(activation="tanh", solver='sgd', alpha=1e-5, hidden_layer_sizes=(100, 100,), learning_rate_init=0.041 , random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+
+
+clf = MLPClassifier(activation="tanh", solver='sgd', alpha=1e-5, learning_rate_init=0.041 , random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+# print(classification_report(train_Y, pre_train_Y, target_names=None))
+
 # np.set_printoptions(precision=2)
 #
 # # Plot non-normalized confusion matrix
@@ -74,7 +107,9 @@ from sklearn.metrics import classification_report, plot_confusion_matrix
 #
 # plt.show()
 
-learningR = []
+learningRTest = []
+learningRTrain = []
+
 
 for learningRate in np.arange(0.001, 0.5, 0.01):
     clf = MLPClassifier(activation="tanh", solver='sgd', learning_rate_init=learningRate, alpha=1e-5,
@@ -84,16 +119,85 @@ for learningRate in np.arange(0.001, 0.5, 0.01):
     # pre_train_Y = clf.predict(train_X)
 
     print("learning rate " + str(learningRate) + " :" + str(clf.score(X_test, y_test)))
-    learningR.append(clf.score(X_test, y_test))
+    learningRTest.append(clf.score(X_test, y_test))
+    learningRTrain.append(clf.score(X_train, y_train))
     # print(classification_report(train_Y, pre_train_Y, target_names=None))
 
 plt.figure()
-plt.plot(np.arange(0.001, 0.5, 0.01), learningR, "#8B27CC")
+plt.plot(np.arange(0.001, 0.5, 0.01), learningRTest, "#8B27CC")
+plt.plot(np.arange(0.001, 0.5, 0.01), learningRTrain, "#EF1414")
 plt.ylabel("Accuracy")
 plt.xlabel("learningR")
 plt.legend(['Test Data', 'Train Data'], loc=0, borderaxespad=0.2)
-plt.text(np.max(learningR), np.argmax(learningR) * 0.01 + 0.001,
-         ("x = " + str(np.max(learningR)) + "y = " + str(np.argmax(learningR) * 0.01 + 0.001)))
+plt.text(np.max(learningRTest), np.argmax(learningRTest) * 0.01 + 0.001,
+         ("x = " + str(np.max(learningRTest)) + "y = " + str(np.argmax(learningRTest) * 0.01 + 0.001)))
+plt.text(np.max(learningRTrain), np.argmax(learningRTrain) * 0.01 + 0.001,
+         ("x = " + str(np.max(learningRTrain)) + "y = " + str(np.argmax(learningRTrain) * 0.01 + 0.001)))
 plt.show()
 
-print("x = " + str(np.max(learningR)) + " y = " + str(np.argmax(learningR) * 0.01 + 0.001))
+print("x = " + str(np.max(learningRTest)) + " y = " + str(np.argmax(learningRTest) * 0.01 + 0.001))
+
+
+
+result = [];
+
+clf = MLPClassifier(activation="identity",solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+# print(classification_report(train_Y, pre_train_Y, target_names=None))
+
+result.append(clf.score(X_test, y_test))
+np.set_printoptions(precision=2)
+
+
+clf = MLPClassifier(activation="logistic",solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+# print(classification_report(train_Y, pre_train_Y, target_names=None))
+result.append(clf.score(X_test, y_test))
+np.set_printoptions(precision=2)
+
+
+clf = MLPClassifier(activation= "relu",solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+# print(classification_report(train_Y, pre_train_Y, target_names=None))
+result.append(clf.score(X_test, y_test))
+np.set_printoptions(precision=2)
+
+
+clf = MLPClassifier(activation= "tanh",solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
+clf.fit(X_train, y_train)
+y_pre = clf.predict(X_test)
+# pre_train_Y = clf.predict(train_X)
+
+print(clf.score(X_test, y_test))
+print(classification_report(y_test, y_pre, target_names = None))
+# print(classification_report(train_Y, pre_train_Y, target_names=None))
+result.append(clf.score(X_test, y_test))
+np.set_printoptions(precision=2)
+
+
+
+activationMethod = ('identity', 'logistic', 'relu', 'tanh')
+y_pos = np.arange(len(activationMethod))
+accuracy = result
+
+plt.bar(y_pos, accuracy, align='center', alpha=0.5)
+plt.xticks(y_pos, activationMethod)
+plt.ylabel('accuracy')
+plt.title('NN accuracy vs Activation function')
+
+plt.show()

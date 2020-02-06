@@ -55,7 +55,7 @@ plt.text(np.argmax(test),np.max(test),(str(np.max(test))+ ","+ str(np.argmax(tes
 plt.ylabel("Accuracy")
 plt.xlabel("ccp_alpha")
 plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
-plt.title("relation between Accuracy vs Pruning")
+plt.title("Boosting relation between Accuracy vs Pruning")
 plt.show()
 
 # clf = AdaBoostClassifier(DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0,ccp_alpha = 0.0),n_estimators=100, random_state=0)

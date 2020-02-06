@@ -98,7 +98,7 @@ accuracy = result
 plt.bar(y_pos, accuracy, align='center', alpha=0.5)
 plt.xticks(y_pos, kernelMethod)
 plt.ylabel('accuracy')
-plt.title('NN accuracy vs Activation function')
+plt.title('Census SVM accuracy in Different kernel')
 
 
 plt.show()

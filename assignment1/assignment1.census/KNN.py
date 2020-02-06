@@ -163,6 +163,7 @@ for k in np.arange(1, 30, 2):
     y_pre = clf.predict(X_test)
 
     test.append(clf.score(X_test,y_test))
+    train.append(clf.score(X_train,y_train))
     print(clf.score(X_test, y_test))
     np.set_printoptions(precision=2)
 
