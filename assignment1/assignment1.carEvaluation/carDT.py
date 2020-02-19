@@ -30,7 +30,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.70, random
 from sklearn import tree
 from sklearn.metrics import classification_report, plot_confusion_matrix
 
-clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0,ccp_alpha = 0.00)
+clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0,ccp_alpha = 0.02)
 
 clf.fit(X_train, y_train)
 y_tra = clf.predict(X_train)

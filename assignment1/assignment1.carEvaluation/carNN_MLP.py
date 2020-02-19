@@ -91,7 +91,7 @@ accuracy = result
 plt.bar(y_pos, accuracy, align='center', alpha=0.5)
 plt.xticks(y_pos, activationMethod)
 plt.ylabel('accuracy')
-plt.title('NN accuracy vs Activation function')
+plt.title('NN accuracy vs Activation function: car')
 
 plt.show()
 
@@ -129,11 +129,10 @@ plt.plot(np.arange(0.001, 0.5, 0.01), learningRTrain, "#EF1414")
 plt.ylabel("Accuracy")
 plt.xlabel("learningR")
 plt.legend(['Test Data', 'Train Data'], loc=0, borderaxespad=0.2)
-plt.title('NN accuracy vs learning Rate')
+plt.title('NN accuracy vs learning Rate :car')
 plt.text(np.argmax(learningRTest) * 0.01 + 0.001, np.max(learningRTrain),
          ("x = " + str(np.argmax(learningRTest) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
-plt.text(np.argmax(learningRTrain) * 0.01 + 0.001, np.max(learningRTrain),
-         ("x = " + str(np.argmax(learningRTrain) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
+
 
 plt.show()
 

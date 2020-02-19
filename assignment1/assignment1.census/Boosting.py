@@ -52,7 +52,7 @@ test = []
 train = []
 
 
-for k in np.arange(0, 0.15, 0.01):
+for k in np.arange(0, 0.2, 0.001):
     clf = AdaBoostClassifier(DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0, ccp_alpha=k),
                              n_estimators=100, random_state=0)
     clf.fit(X_train, y_train)
@@ -66,16 +66,16 @@ for k in np.arange(0, 0.15, 0.01):
 
 
 plt.figure()
-plt.plot(np.arange(0, 0.15, 0.01),test,"#8B27CC")
-plt.plot(np.arange(0, 0.15, 0.01),train,"#25B71A")
-plt.text(np.argmax(test),np.max(test),("x = " +str(np.max(test))+ "y = " + str(np.argmax(test))))
+plt.plot(np.arange(0, 0.2, 0.001),test,"#8B27CC")
+plt.plot(np.arange(0, 0.2, 0.001),train,"#25B71A")
+plt.text(np.argmax(test),np.max(test),(str(np.max(test))+ ","+ str(np.argmax(test))))
 plt.ylabel("Accuracy")
 plt.xlabel("ccp_alpha")
 plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
-plt.title("Boosting relation between Accuracy vs Pruning")
+plt.title("Boosting relation between Accuracy vs Pruning : census")
 plt.show()
 
-
+print(str(np.max(test))+ ","+ str(np.argmax(test)))
 # # Plot non-normalized confusion matrix
 # titles_options = [("Confusion matrix, without normalization", None),
 #                   ("Normalized confusion matrix", 'true')]

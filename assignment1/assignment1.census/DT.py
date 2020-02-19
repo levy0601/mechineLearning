@@ -50,7 +50,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50, random
 from sklearn import tree
 from sklearn.metrics import classification_report, plot_confusion_matrix
 
-ccp_alpha = 0.10
+ccp_alpha = 0
 print ("ccp_alpha = "  + str(ccp_alpha))
 clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0,ccp_alpha = ccp_alpha)
 
@@ -94,7 +94,7 @@ np.set_printoptions(precision=2)
 #     print(title)
 #     print(disp.confusion_matrix)
 #
-# plt.show()
+plt.show()
 
 clf = tree.DecisionTreeClassifier(random_state=0)
 path = clf.cost_complexity_pruning_path(X_train, y_train)

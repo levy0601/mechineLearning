@@ -36,7 +36,7 @@ from sklearn.metrics import classification_report, plot_confusion_matrix
 test = []
 train = []
 
-for k in np.arange(0, 0.5, 0.01):
+for k in np.arange(0, 0.8, 0.01):
     clf = AdaBoostClassifier(DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0, ccp_alpha=k),
                              n_estimators=100, random_state=0)
     clf.fit(X_train, y_train)
@@ -49,13 +49,14 @@ for k in np.arange(0, 0.5, 0.01):
     np.set_printoptions(precision=2)
 
 plt.figure()
-plt.plot(np.arange(0, 0.5, 0.01),test,"#8B27CC")
-plt.plot(np.arange(0, 0.5, 0.01),train,"#EF1414")
+plt.plot(np.arange(0, 0.8, 0.01),test,"#8B27CC")
+plt.plot(np.arange(0, 0.8, 0.01),train,"#EF1414")
 plt.text(np.argmax(test),np.max(test),(str(np.max(test))+ ","+ str(np.argmax(test))))
+plt.text(np.argmax(train),np.max(train),(str(np.max(train))+ ","+ str(np.argmax(train))))
 plt.ylabel("Accuracy")
 plt.xlabel("ccp_alpha")
 plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
-plt.title("Boosting relation between Accuracy vs Pruning")
+plt.title("Boosting relation between Accuracy vs Pruning : car")
 plt.show()
 
 # clf = AdaBoostClassifier(DecisionTreeClassifier(criterion='entropy', max_depth=40, random_state=0,ccp_alpha = 0.0),n_estimators=100, random_state=0)

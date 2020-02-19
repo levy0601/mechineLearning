@@ -1,4 +1,3 @@
-# import needed module
 import pandas as pd
 import numpy as np
 import math
@@ -30,28 +29,100 @@ from sklearn.pipeline import make_pipeline
 
 #Evaluation Metrics
 from scipy.cluster.hierarchy import dendrogram
-from sklearn.metrics import classification_report, plot_confusion_matrix
+from sklearn.metrics import classification_report, plot_confusion_matrix, silhouette_score
 from sklearn import metrics
 
 
 #load data
 encoder_x =LabelEncoder()
 
-data = pd.read_csv("../../data set/Car Evaluation/car.csv")
+data = pd.read_csv("../../data set/Census Income Data Set/adult.csv")
+data.iloc[:,0] = encoder_x.fit_transform(data.iloc[:,0])
+data.iloc[:,1] = encoder_x.fit_transform(data.iloc[:,1])
+data.iloc[:,2] = encoder_x.fit_transform(data.iloc[:,2])
+data.iloc[:,3] = encoder_x.fit_transform(data.iloc[:,3])
+data.iloc[:,4] = encoder_x.fit_transform(data.iloc[:,4])
+data.iloc[:,5] = encoder_x.fit_transform(data.iloc[:,5])
 data.iloc[:,6] = encoder_x.fit_transform(data.iloc[:,6])
-data = data.replace(999,np.NaN)
-data = data.dropna()
-# print(data.iloc[9:13, 0:3])
+data.iloc[:,7] = encoder_x.fit_transform(data.iloc[:,7])
+data.iloc[:,8] = encoder_x.fit_transform(data.iloc[:,8])
+data.iloc[:,9] = encoder_x.fit_transform(data.iloc[:,9])
+data.iloc[:,10] = encoder_x.fit_transform(data.iloc[:,10])
+data.iloc[:,11] = encoder_x.fit_transform(data.iloc[:,11])
+data.iloc[:,12] = encoder_x.fit_transform(data.iloc[:,12])
+data.iloc[:,13] = encoder_x.fit_transform(data.iloc[:,13])
+data.iloc[:,14] = encoder_x.fit_transform(data.iloc[:,14])
 
-X = data.iloc[:,0:6]
 
-y = data.iloc[:,6]
+X = data.iloc[:, 0:14]
+
+y = data.iloc[:, 14]
 y = np.array(y)
 y = y.flatten()
-print(len(y),sum(y),encoder_x.classes_)#print the nnumber of instances, features, and the name of classes
+
+print(len(y),X.shape[1],encoder_x.classes_)#print the nnumber of instances, features, and the name of classes
+
 scaler1 = preprocessing.MinMaxScaler()
 scaler1.fit(X)
 X = scaler1.transform(X)
+
+
+
+# #decide k -- Elbow method
+# distance = []
+# k = []
+# kmax = 10
+#
+#
+# for n_clusters in range(1,kmax):
+#     cls = KMeans(n_clusters).fit(X)
+#     distance.append(cls.inertia_)#Sum of squared distances of samples to their closest cluster center.
+#     k.append(n_clusters)
+#     print(str(kmax) + " :" + str(n_clusters))
+#
+# plt.title("Census :Elbow Method")
+# plt.scatter(k, distance)
+# plt.plot(k, distance)
+# plt.xlabel("k")
+# plt.ylabel(" squared distances of samples to their closest cluster center")
+# plt.show()
+#
+#
+#
+# sil = []
+# k = []
+# set = []
+#
+#
+# # dissimilarity would not be defined for a single cluster, thus, minimum number of clusters should be 2
+# for n_clusters in range(2, kmax+1):
+#   kmeans = KMeans(n_clusters = n_clusters).fit(X)
+#   labels = kmeans.labels_
+#   sil.append(silhouette_score(X, labels, metric = 'euclidean'))
+#   k.append(n_clusters)
+#   set.append([n_clusters,silhouette_score(X, labels, metric = 'euclidean')])
+#   print(str(kmax) + " :" + str(n_clusters))
+#
+#
+# def getMax(list):
+#     maxX = 0;
+#     maxY = 0;
+#     for x in list:
+#         if (maxY < x[1]):
+#             maxY = x[1]
+#             maxX = x[0]
+#     return [maxX, maxY]
+#
+# max_sil = getMax(set)
+# print ("test_max_alpha" + str(max_sil))
+#
+# plt.title("Census : Silhouette Method")
+# plt.scatter(k, sil)
+# plt.plot(k, sil)
+# plt.xlabel("k")
+# plt.ylabel(" silhouette value")
+# plt.text(max_sil[0],max_sil[1],(str(max_sil[0])+ "," + "{0:.4f}".format(max_sil[1])))
+# plt.show()
 
 data = X
 # Data decomposition
@@ -66,14 +137,14 @@ print (pca.explained_variance_)
 print (pca.n_components_)
 
 #FastICA
-reduced_data_ICA = FastICA(n_components=4, random_state=0).fit_transform(data)
+reduced_data_ICA = FastICA(n_components=2, random_state=0).fit_transform(data)
 
 # Clustering, Evaluation on original dataset
 np.random.seed(42)
 data = X
 n_samples, n_features = data.shape
 # n_digits = len(np.unique(y))
-n_digits = 4
+n_digits = 2
 sample_size = n_samples
 
 
@@ -168,3 +239,5 @@ plt.ylim(y_min, y_max)
 plt.xticks(())
 plt.yticks(())
 plt.show()
+
+

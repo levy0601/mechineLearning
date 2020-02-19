@@ -28,52 +28,52 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 
 from sklearn import svm, metrics
 from sklearn.metrics import classification_report, plot_confusion_matrix
-result = []
-kernel = "linear"
-clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
-clf.fit(X_train, y_train)
-y_pre_ovo = clf.predict(X_test)
-result.append(clf.score(X_test, y_test))
-# pre_train_Y = clf.predict(train_X)
-
-
-print(kernel + " " + str( clf.score(X_test, y_test)))
-
-kernel = "poly"
-clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
-clf.fit(X_train, y_train)
-y_pre_ovo = clf.predict(X_test)
-result.append(clf.score(X_test, y_test))
-# pre_train_Y = clf.predict(train_X)
-
-print(kernel + " " + str( clf.score(X_test, y_test)))
-
-
-kernel = "rbf"
-clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
-clf.fit(X_train, y_train)
-y_pre_ovo = clf.predict(X_test)
-result.append(clf.score(X_test, y_test))
-# pre_train_Y = clf.predict(train_X)
-
-print(kernel + " " + str( clf.score(X_test, y_test)))
-
-
-kernel = "sigmoid"
-clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
-clf.fit(X_train, y_train)
-y_pre_ovo = clf.predict(X_test)
-result.append(clf.score(X_test, y_test))
-# pre_train_Y = clf.predict(train_X)
-
-print(kernel + " " + str( clf.score(X_test, y_test)))
-
-
-
-# print(classification_report(y_test, y_pre_ovo, target_names = None))
-# print(classification_report(train_Y, pre_train_Y, target_names=None))
-
-np.set_printoptions(precision=2)
+# result = []
+# kernel = "linear"
+# clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+# clf.fit(X_train, y_train)
+# y_pre_ovo = clf.predict(X_test)
+# result.append(clf.score(X_test, y_test))
+# # pre_train_Y = clf.predict(train_X)
+#
+#
+# print(kernel + " " + str( clf.score(X_test, y_test)))
+#
+# kernel = "poly"
+# clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+# clf.fit(X_train, y_train)
+# y_pre_ovo = clf.predict(X_test)
+# result.append(clf.score(X_test, y_test))
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(kernel + " " + str( clf.score(X_test, y_test)))
+#
+#
+# kernel = "rbf"
+# clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+# clf.fit(X_train, y_train)
+# y_pre_ovo = clf.predict(X_test)
+# result.append(clf.score(X_test, y_test))
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(kernel + " " + str( clf.score(X_test, y_test)))
+#
+#
+# kernel = "sigmoid"
+# clf = svm.SVC(kernel=kernel,decision_function_shape='ovo')
+# clf.fit(X_train, y_train)
+# y_pre_ovo = clf.predict(X_test)
+# result.append(clf.score(X_test, y_test))
+# # pre_train_Y = clf.predict(train_X)
+#
+# print(kernel + " " + str( clf.score(X_test, y_test)))
+#
+#
+#
+# # print(classification_report(y_test, y_pre_ovo, target_names = None))
+# # print(classification_report(train_Y, pre_train_Y, target_names=None))
+#
+# np.set_printoptions(precision=2)
 
 # # Plot non-normalized confusion matrix
 # titles_options = [("Confusion matrix, without normalization", None),
@@ -90,15 +90,40 @@ np.set_printoptions(precision=2)
 #
 # plt.show()
 
-
+#
 kernelMethod = ('linear', 'poly', 'rbf', 'sigmoid')
-y_pos = np.arange(len(kernelMethod))
-accuracy = result
-
-plt.bar(y_pos, accuracy, align='center', alpha=0.5)
-plt.xticks(y_pos, kernelMethod)
-plt.ylabel('accuracy')
-plt.title('Census SVM accuracy in Different kernel')
-
+# y_pos = np.arange(len(kernelMethod))
+# accuracy = result
+#
+# plt.bar(y_pos, accuracy, align='center', alpha=0.5)
+# plt.xticks(y_pos, kernelMethod)
+# plt.ylabel('accuracy')
+# plt.title('Census SVM accuracy in Different kernel : car ')
+#
 
 plt.show()
+
+
+gamma = 0.1
+
+for kernel in kernelMethod:
+    test = []
+    train = []
+    for gamma in np.arange(0.00001, 1, 0.01):
+        clf = svm.SVC(kernel=kernel,decision_function_shape='ovo',gamma=gamma)
+        clf.fit(X_train, y_train)
+        y_pre_ovo = clf.predict(X_test)
+        test.append(clf.score(X_test, y_test))
+        train.append(clf.score(X_train,y_train))
+
+
+    plt.figure()
+    plt.plot(np.arange(0, 1, 0.01),test,"#8B27CC")
+    plt.plot(np.arange(0, 1, 0.01),train,"#25B71A")
+    plt.text(np.argmax(test) * 0.01 , np.max(test),
+             ("x = " + str(np.argmax(test) * 0.01 )) + " y = " + str(np.max(test)))
+    plt.ylabel("Accuracy")
+    plt.xlabel("gamma")
+    plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
+    plt.title("SVM relation between Accuracy vs Gamma : car," + kernel)
+    plt.show()

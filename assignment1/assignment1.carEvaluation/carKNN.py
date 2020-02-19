@@ -83,5 +83,5 @@ plt.text(np.argmax(test),np.max(test),(str(np.max(test))+ ", " + str(np.argmax(t
 plt.ylabel("Accuracy")
 plt.xlabel("K")
 plt.legend(['Test Data', 'Train Data'],  loc=0, borderaxespad=0.2)
-plt.title('KNN accuracy vs K Neighbour')
+plt.title('KNN accuracy vs K Neighbour : car')
 plt.show()

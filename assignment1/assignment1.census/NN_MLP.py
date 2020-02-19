@@ -133,7 +133,7 @@ plt.text(np.argmax(learningRTest) * 0.01 + 0.001, np.max(learningRTrain),
          ("x = " + str(np.argmax(learningRTest) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
 plt.text(np.argmax(learningRTrain) * 0.01 + 0.001, np.max(learningRTrain),
          ("x = " + str(np.argmax(learningRTrain) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
-plt.title('NN accuracy vs learningRate')
+plt.title('NN accuracy vs learningRate: census')
 plt.show()
 
 print(("x = " + str(np.argmax(learningRTest) * 0.01 + 0.001)) + " y = " + str(np.max(learningRTrain)))
@@ -199,6 +199,6 @@ accuracy = result
 plt.bar(y_pos, accuracy, align='center', alpha=0.5)
 plt.xticks(y_pos, activationMethod)
 plt.ylabel('accuracy')
-plt.title('NN accuracy vs Activation function')
+plt.title('NN accuracy vs Activation function: census ')
 
 plt.show()
